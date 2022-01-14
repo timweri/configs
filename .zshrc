@@ -78,8 +78,6 @@ ZSH_DISABLE_COMPFIX=true
 
 source $ZSH/oh-my-zsh.sh
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 export LS_COLORS='ow=01;36;40'
 
 export VISUAL=vim
@@ -89,52 +87,4 @@ if [ -f ~/.customrc ]; then
     source ~/.customrc
 else
     print "404: ~/.customrc not found."
-fi
-
-=======
-=======
->>>>>>> Stashed changes
-<<<<<<< HEAD
-export LS_COLORS='ow=01;36;40'
-
-export VISUAL=vim
-export EDITOR="$VISUAL"
-=======
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-prompt_context() {
-    DEFAULT_USER="($whoami)"
-    if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-	prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-    fi
-}
-
-if [ -f ~/.customrc ]; then
-        source ~/.customrc
-    else
-        print "404: ~/.customrc not found."
 fi
