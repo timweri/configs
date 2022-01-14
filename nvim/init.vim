@@ -156,4 +156,7 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
+
+" remap :w save to space button in normal mode
+nnoremap <space> :w<CR>
 "------------------------------------------------------------
