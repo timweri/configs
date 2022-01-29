@@ -143,6 +143,21 @@ set expandtab
 "set shiftwidth=4
 "set tabstop=4
 
+" Install Vim Plug plugins
+call plug#begin()
+
+Plug 'numToStr/Comment.nvim'
+
+Plug 'vim-syntastic/syntastic'
+
+Plug 'ARM9/arm-syntax-vim'
+
+Plug 'luochen1990/rainbow'
+
+Plug 'airblade/vim-gitgutter'
+
+" Initialize plugin system
+call plug#end()
 
 "------------------------------------------------------------
 " Mappings {{{1
@@ -159,4 +174,17 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 " remap :w save to space button in normal mode
 nnoremap <space> :w<CR>
+
+" sv will source vimrc
+nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 "------------------------------------------------------------
+
+
+lua require('Comment').setup()
+
+au BufNewFile, BufRead *.s, *.S set filetype=arm " arm = armv6/v7
+
+"------------------------------------------------------------
+" Config SignColumn
+
+highlight clear SignColumn
