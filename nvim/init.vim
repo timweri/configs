@@ -147,14 +147,11 @@ set expandtab
 call plug#begin()
 
 Plug 'numToStr/Comment.nvim'
-
 Plug 'vim-syntastic/syntastic'
-
 Plug 'ARM9/arm-syntax-vim'
-
 Plug 'luochen1990/rainbow'
-
 Plug 'airblade/vim-gitgutter'
+Plug 'ycm-core/YouCompleteMe'
 
 " Initialize plugin system
 call plug#end()
@@ -187,4 +184,7 @@ au BufNewFile, BufRead *.s, *.S set filetype=arm " arm = armv6/v7
 "------------------------------------------------------------
 " Config SignColumn
 
-highlight clear SignColumn
+hi clear SignColumn
+hi StatusLine   ctermfg=15  guifg=#ffffff ctermbg=239 guibg=#4e4e4e cterm=bold gui=bold
+hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
+hi SyntasticErrorSign guifg=white guibg=red
