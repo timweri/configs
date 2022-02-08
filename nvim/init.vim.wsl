@@ -178,7 +178,17 @@ nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 "------------------------------------------------------------
 
 lua require('Comment').setup()
+
+" deoplete
+
 let g:deoplete#enable_at_startup = 1
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-s> deoplete#close_popup()
+
+"------------------------------------------------------------
 
 au BufNewFile, BufRead *.s, *.S set filetype=arm " arm = armv6/v7
 
