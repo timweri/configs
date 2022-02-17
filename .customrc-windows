@@ -54,6 +54,7 @@ export NVM_DIR="$HOME/.nvm"
 alias vim=nvim
 alias ssh_cs_linux="ssh td4nguye@linux.student.cs.uwaterloo.ca"
 
-export DISPLAY=$(ip route|awk '/^default/{print $3}'):0.0
+# export DISPLAY=$(ip route|awk '/^default/{print $3}'):0.0
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
