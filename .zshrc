@@ -85,6 +85,9 @@ export EDITOR="$VISUAL"
 
 # User configuration
 
+alias githide="git config oh-my-zsh.hide-status 1"
+alias gitshow="git config oh-my-zsh.hide-status 0"
+
 if [ -f ~/.customrc ]; then
     source ~/.customrc
 else
