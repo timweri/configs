@@ -85,6 +85,7 @@ export EDITOR="$VISUAL"
 
 # User configuration
 
+# Show/hide git prompt
 alias githide="git config oh-my-zsh.hide-status 1"
 alias gitshow="git config oh-my-zsh.hide-status 0"
 
