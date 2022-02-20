@@ -149,15 +149,17 @@ call plug#begin()
 Plug 'numToStr/Comment.nvim'
 Plug 'vim-syntastic/syntastic'
 Plug 'ARM9/arm-syntax-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'luochen1990/rainbow'
 Plug 'airblade/vim-gitgutter'
-Plug 'ycm-core/YouCompleteMe'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()
 
 "------------------------------------------------------------
-" Mappings {{{1
+" Mappings
 "
 " Useful mappings
 
@@ -172,19 +174,54 @@ nnoremap <C-L> :nohl<CR><C-L>
 " remap :w save to space button in normal mode
 nnoremap <space> :w<CR>
 
-" sv will source vimrc
-nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 "------------------------------------------------------------
+" Commands 
+"
 
+command! SV :source ~/.config/nvim/init.vim 
+
+"------------------------------------------------------------
 
 lua require('Comment').setup()
 
-au BufNewFile, BufRead *.s, *.S set filetype=arm " arm = armv6/v7
+"------------------------------------------------------------
+" deoplete
+"
+
+let g:deoplete#enable_at_startup = 1
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-s> deoplete#close_popup()
 
 "------------------------------------------------------------
-" Config SignColumn
+" fzf
+"
+
+command! -bang -nargs=? -complete=dir F call fzf#vim#files(<q-args>, <bang>0)
+
+"------------------------------------------------------------
+" Syntastic
+"
+
+au BufNewFile, BufRead *.s, *.S set filetype=arm " arm = armv6/v7
+
+hi SystasticErrorSign guifg=white guibg=red
+hi SpellBad ctermfg=red ctermbg=8
+hi SpellCap ctermfg=green ctermbg=8
+
+" Syntastic config files
+let g:syntastic_c_config_file = '.syntastic_c_config_file'
+
+"------------------------------------------------------------
+" Config Vim Appearance
+"
 
 hi clear SignColumn
-hi StatusLine   ctermfg=15  guifg=#ffffff ctermbg=239 guibg=#4e4e4e cterm=bold gui=bold
+" hi StatusLine ctermfg=15 guifg=#ffffff ctermbg=4 guibg=#4e4e4e cterm=bold gui=bold
+hi StatusLine ctermfg=white guifg=#ffffff ctermbg=13 guibg=#4e4e4e cterm=bold gui=bold
 hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
-hi SyntasticErrorSign guifg=white guibg=red
+
+source ~/.config/nvim/custom.vim
+
