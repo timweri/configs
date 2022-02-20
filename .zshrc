@@ -88,6 +88,9 @@ export EDITOR="$VISUAL"
 # Show/hide git prompt
 alias githide="git config oh-my-zsh.hide-status 1"
 alias gitshow="git config oh-my-zsh.hide-status 0"
+alias vim=nvim
+alias ssh_cs="ssh -D 1081 td4nguye@linux.student.cs.uwaterloo.ca"
+alias ssh_datasci="ssh -D 1080 td4nguye@datasci.cs.uwaterloo.ca"
 
 if [ -f ~/.customrc ]; then
     source ~/.customrc
