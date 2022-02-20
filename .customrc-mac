@@ -23,5 +23,4 @@
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ssh_cs_linux="ssh td4nguye@linux.student.cs.uwaterloo.ca"
-alias vim=nvim
+export PATH="/usr/local/bin:${PATH}"
