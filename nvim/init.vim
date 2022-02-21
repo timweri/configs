@@ -154,6 +154,7 @@ Plug 'luochen1990/rainbow'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'svermeulen/vim-cutlass'
 
 " Initialize plugin system
 call plug#end()
@@ -173,6 +174,13 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 " remap :w save to space button in normal mode
 nnoremap <space> :w<CR>
+
+" cutlass.vim: map m to move
+nnoremap m d
+xnoremap m d
+
+nnoremap mm dd
+nnoremap M D
 
 "------------------------------------------------------------
 " Commands 
