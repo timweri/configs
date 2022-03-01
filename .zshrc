@@ -72,6 +72,7 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+    zsh-vi-mode
 )
 
 ZSH_DISABLE_COMPFIX=true
