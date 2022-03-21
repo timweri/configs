@@ -221,6 +221,8 @@ hi SpellCap ctermfg=green ctermbg=8
 
 " Syntastic config files
 let g:syntastic_c_config_file = '.syntastic_c_config_file'
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['python']
 
 "------------------------------------------------------------
 " Config Vim Appearance
