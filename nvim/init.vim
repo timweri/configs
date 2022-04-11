@@ -155,6 +155,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'svermeulen/vim-cutlass'
+Plug 'lervag/vimtex'
 
 " Initialize plugin system
 call plug#end()

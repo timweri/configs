@@ -9,3 +9,11 @@ if executable(s:clip)
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif
+
+"------------------------------------------------------------
+" Sumatra
+"
+
+let g:vimtex_view_general_viewer = 'sumatraPDF'
+let g:vimtex_view_general_options = '-reuse-instance @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
