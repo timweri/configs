@@ -150,12 +150,12 @@ Plug 'numToStr/Comment.nvim'
 Plug 'vim-syntastic/syntastic'
 Plug 'ARM9/arm-syntax-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'luochen1990/rainbow'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'svermeulen/vim-cutlass'
 Plug 'lervag/vimtex'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Initialize plugin system
 call plug#end()
@@ -233,6 +233,8 @@ hi clear SignColumn
 " hi StatusLine ctermfg=15 guifg=#ffffff ctermbg=4 guibg=#4e4e4e cterm=bold gui=bold
 hi StatusLine ctermfg=white guifg=#ffffff ctermbg=13 guibg=#4e4e4e cterm=bold gui=bold
 hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
+
+hi MatchParen cterm=none ctermbg=green ctermfg=black
 
 source ~/.config/nvim/custom.vim
 
