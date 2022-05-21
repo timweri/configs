@@ -162,6 +162,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'TimUntersberger/neogit'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'sainnhe/sonokai'
 
 " Initialize plugin system
@@ -293,7 +294,12 @@ nnoremap <C-n> :NvimTreeFocus<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 " nnoremap <leader>n :NvimTreeFindFile<CR>
 
-lua require'nvim-tree'.setup()
+lua << EOF
+    require'nvim-tree'.setup {
+        open_on_setup = true,
+        open_on_tab = true,
+    }
+EOF
 
 "------------------------------------------------------------
 " neogit + diffview
@@ -301,7 +307,13 @@ lua require'nvim-tree'.setup()
 
 lua <<EOF
     local cb = require'diffview.config'.diffview_callback
-    require'diffview'.setup {}
+    require'diffview'.setup {
+        file_panel = {
+            win_config = {
+                position = "right",
+            }
+        }
+    }
 
     local neogit = require('neogit')
     neogit.setup {}
@@ -310,6 +322,31 @@ EOF
 nnoremap <leader>gg :Neogit<CR>
 nnoremap <leader>dv :DiffviewOpen<CR>
 nnoremap <leader>ct :tabclose<CR>
+
+"------------------------------------------------------------
+" bufferline
+"
+
+lua << EOF
+    require("bufferline").setup {
+        options = {
+            mode = "tabs",
+            offsets = {
+                {
+                    filetype = "NvimTree",
+                    text = "File Explorer",
+                    highlight = "Directory",
+                    text_align = "left"
+                }
+            }
+        }
+    }
+EOF
+
+
+nnoremap tj :tabprevious<CR>                                                                            
+nnoremap tk :tabnext<CR>
+nnoremap <leader>tn :tabnew<CR>
 
 source ~/.config/nvim/custom.vim
 
