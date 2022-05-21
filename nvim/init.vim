@@ -154,10 +154,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'svermeulen/vim-cutlass'
 Plug 'lervag/vimtex'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'sainnhe/sonokai'
 
 " Initialize plugin system
@@ -280,6 +281,16 @@ lua <<EOF
         space_char_blankline = " ",
     }
 EOF
+
+"------------------------------------------------------------
+" nvim-tree
+"
+
+nnoremap <C-n> :NvimTreeFocus<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <leader>n :NvimTreeFindFile<CR>
+
+lua require'nvim-tree'.setup()
 
 source ~/.config/nvim/custom.vim
 
