@@ -148,7 +148,6 @@ call plug#begin()
 
 Plug 'numToStr/Comment.nvim'
 Plug 'vim-syntastic/syntastic'
-Plug 'ARM9/arm-syntax-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -156,6 +155,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'svermeulen/vim-cutlass'
 Plug 'lervag/vimtex'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'sainnhe/sonokai'
 
 " Initialize plugin system
 call plug#end()
@@ -188,6 +191,7 @@ nnoremap M D
 "
 
 command! SV :source ~/.config/nvim/init.vim 
+command! EV :e ~/.config/nvim/init.vim 
 
 "------------------------------------------------------------
 
@@ -231,10 +235,51 @@ let g:syntastic_python_checkers = ['python']
 
 hi clear SignColumn
 " hi StatusLine ctermfg=15 guifg=#ffffff ctermbg=4 guibg=#4e4e4e cterm=bold gui=bold
-hi StatusLine ctermfg=white guifg=#ffffff ctermbg=13 guibg=#4e4e4e cterm=bold gui=bold
-hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
+" hi StatusLine ctermfg=white guifg=#ffffff ctermbg=13 guibg=#4e4e4e cterm=bold gui=bold
+" hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
 
-hi MatchParen cterm=none ctermbg=green ctermfg=black
+" hi MatchParen cterm=none ctermbg=green ctermfg=black
+set noshowmode
+
+lua require('nvim-web-devicons').setup()
+lua require('lualine').setup()
+
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'andromeda'
+let g:sonokai_better_performance = 1
+colorscheme sonokai
+
+"------------------------------------------------------------
+" treesitter
+"
+
+lua <<EOF
+    require'nvim-treesitter.configs'.setup {
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+    }
+EOF
+
+"------------------------------------------------------------
+" indent-blankline
+"
+
+lua <<EOF
+    vim.opt.list = true
+    vim.opt.listchars:append("space:⋅")
+    vim.opt.listchars:append("eol:↴")
+
+    require("indent_blankline").setup {
+        show_end_of_line = true,
+        space_char_blankline = " ",
+    }
+EOF
 
 source ~/.config/nvim/custom.vim
 
