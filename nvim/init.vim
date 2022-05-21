@@ -159,6 +159,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
+Plug 'TimUntersberger/neogit'
 Plug 'sainnhe/sonokai'
 
 " Initialize plugin system
@@ -291,6 +294,22 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 " nnoremap <leader>n :NvimTreeFindFile<CR>
 
 lua require'nvim-tree'.setup()
+
+"------------------------------------------------------------
+" neogit + diffview
+"
+
+lua <<EOF
+    local cb = require'diffview.config'.diffview_callback
+    require'diffview'.setup {}
+
+    local neogit = require('neogit')
+    neogit.setup {}
+EOF
+
+nnoremap <leader>gg :Neogit<CR>
+nnoremap <leader>dv :DiffviewOpen<CR>
+nnoremap <leader>ct :tabclose<CR>
 
 source ~/.config/nvim/custom.vim
 
