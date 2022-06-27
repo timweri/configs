@@ -70,6 +70,10 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+
+    # git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+    fzf-tab
+
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-vi-mode
@@ -92,6 +96,8 @@ alias gitshow="git config oh-my-zsh.hide-status 0"
 alias vim=nvim
 alias ssh_cs="ssh -D 1081 td4nguye@linux.student.cs.uwaterloo.ca"
 alias ssh_datasci="ssh -D 1080 td4nguye@datasci.cs.uwaterloo.ca"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [ -f ~/.customrc ]; then
     source ~/.customrc
