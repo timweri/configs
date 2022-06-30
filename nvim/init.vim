@@ -321,7 +321,7 @@ EOF
 
 nnoremap <leader>gg :Neogit<CR>
 nnoremap <leader>dv :DiffviewOpen<CR>
-nnoremap <leader>ct :tabclose<CR>
+nnoremap <leader>tc :tabclose<CR>
 
 "------------------------------------------------------------
 " bufferline
