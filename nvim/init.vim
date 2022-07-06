@@ -164,6 +164,7 @@ Plug 'sindrets/diffview.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'sainnhe/sonokai'
+" Plug 'ludovicchabant/vim-gutentags'
 
 " Initialize plugin system
 call plug#end()
@@ -343,6 +344,11 @@ lua << EOF
     }
 EOF
 
+"------------------------------------------------------------
+" gutentags
+"
+
+" set statusline+=%{gutentags#statusline()}
 
 nnoremap tj :tabprevious<CR>                                                                            
 nnoremap tk :tabnext<CR>
