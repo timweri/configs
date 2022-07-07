@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 
 export LS_COLORS='ow=01;36;40'
 
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # User configuration
