@@ -99,7 +99,8 @@ alias vim=nvim
 alias ssh_cs="ssh -D 1081 td4nguye@linux.student.cs.uwaterloo.ca"
 alias ssh_datasci="ssh -D 1080 td4nguye@datasci.cs.uwaterloo.ca"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 # bindkey '^r' fzf-history-widget
 
 # fzf util functions
