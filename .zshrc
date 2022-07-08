@@ -71,12 +71,14 @@ ZSH_THEME="agnoster"
 plugins=(
     git
 
+    zsh-vi-mode
+
     # git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
     fzf-tab
+    fzf
 
     zsh-autosuggestions
     zsh-syntax-highlighting
-    zsh-vi-mode
 )
 
 ZSH_DISABLE_COMPFIX=true
@@ -98,6 +100,17 @@ alias ssh_cs="ssh -D 1081 td4nguye@linux.student.cs.uwaterloo.ca"
 alias ssh_datasci="ssh -D 1080 td4nguye@datasci.cs.uwaterloo.ca"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# bindkey '^r' fzf-history-widget
+
+# fzf util functions
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
 
 if [ -f ~/.customrc ]; then
     source ~/.customrc
