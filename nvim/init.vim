@@ -214,6 +214,8 @@ lua require('Comment').setup()
 " fzf
 "
 
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 command! -bang -nargs=? -complete=dir F call fzf#vim#files(<q-args>, <bang>0)
 
 "------------------------------------------------------------
@@ -404,6 +406,10 @@ EOF
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+"------------------------------------------------------------
+" tab keybinds
+"
 
 nnoremap tj :tabprevious<CR>                                                                            
 nnoremap tk :tabnext<CR>
