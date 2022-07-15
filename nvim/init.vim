@@ -148,7 +148,6 @@ call plug#begin()
 
 Plug 'numToStr/Comment.nvim'
 Plug 'vim-syntastic/syntastic'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -164,7 +163,15 @@ Plug 'sindrets/diffview.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'sainnhe/sonokai'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'williamboman/nvim-lsp-installer'
+
+" Lsp stuffs
+Plug 'neovim/nvim-lspconfig'
+
+" coq
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 " Initialize plugin system
 call plug#end()
@@ -202,17 +209,6 @@ command! EV :e ~/.config/nvim/init.vim
 "------------------------------------------------------------
 
 lua require('Comment').setup()
-
-"------------------------------------------------------------
-" deoplete
-"
-
-let g:deoplete#enable_at_startup = 1
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-s> deoplete#close_popup()
 
 "------------------------------------------------------------
 " fzf
@@ -345,10 +341,69 @@ lua << EOF
 EOF
 
 "------------------------------------------------------------
-" gutentags
+" lsp
 "
 
-" set statusline+=%{gutentags#statusline()}
+lua << EOF
+    require("nvim-lsp-installer").setup {
+        automatic_installation = true,
+        ensure_installed = {"clangd"},
+        ui = {
+            icons = {
+                server_installed = "✓",
+                server_pending = "➜",
+                server_uninstalled = "✗"
+            }
+        },
+    }
+
+    
+    -- Mappings.
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    local opts = { noremap=true, silent=true }
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+    -- Use an on_attach function to only map the following keys
+    -- after the language server attaches to the current buffer
+    local on_attach = function(client, bufnr)
+      -- Enable completion triggered by <c-x><c-o>
+      vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+      -- Mappings.
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      local bufopts = { noremap=true, silent=true, buffer=bufnr }
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+      vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+      vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+      vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+      vim.keymap.set('n', '<space>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end, bufopts)
+      vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+      vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+      vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+      vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+      vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+    end
+
+    vim.g.coq_settings = {
+      auto_start = 'shut-up'
+    }
+    local coq = require('coq')
+
+    require('lspconfig')['clangd'].setup(coq.lsp_ensure_capabilities({
+        on_attach = on_attach,
+    }))
+EOF
+
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 nnoremap tj :tabprevious<CR>                                                                            
 nnoremap tk :tabnext<CR>
