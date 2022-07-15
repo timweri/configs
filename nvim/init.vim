@@ -349,7 +349,7 @@ EOF
 lua << EOF
     require("nvim-lsp-installer").setup {
         automatic_installation = true,
-        ensure_installed = {"clangd", "gopls", "tsserver"},
+        ensure_installed = {"clangd", "gopls", "tsserver", "cmake", "marksman", "solc"},
         ui = {
             icons = {
                 server_installed = "✓",
@@ -406,6 +406,15 @@ lua << EOF
         on_attach = on_attach,
     }))
     require('lspconfig')['tsserver'].setup(coq.lsp_ensure_capabilities({
+        on_attach = on_attach,
+    }))
+    require('lspconfig')['cmake'].setup(coq.lsp_ensure_capabilities({
+        on_attach = on_attach,
+    }))
+    require('lspconfig')['marksman'].setup(coq.lsp_ensure_capabilities({
+        on_attach = on_attach,
+    }))
+    require('lspconfig')['solc'].setup(coq.lsp_ensure_capabilities({
         on_attach = on_attach,
     }))
 EOF
