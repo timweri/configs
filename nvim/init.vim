@@ -173,6 +173,9 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
+" sessions
+Plug 'rmagatti/auto-session'
+
 " Initialize plugin system
 call plug#end()
 
@@ -430,5 +433,15 @@ nnoremap tj :tabprevious<CR>
 nnoremap tk :tabnext<CR>
 nnoremap <leader>tn :tabnew<CR>
 
-source ~/.config/nvim/custom.vim
+"------------------------------------------------------------
+" auto-session
+"
 
+lua << EOF
+    require('auto-session').setup {
+        log_level = 'info',
+        auto_session_suppress_dirs = {'~/'}
+    }
+EOF
+
+source ~/.config/nvim/custom.vim
