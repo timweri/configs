@@ -147,7 +147,6 @@ set expandtab
 call plug#begin()
 
 Plug 'numToStr/Comment.nvim'
-Plug 'vim-syntastic/syntastic'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -220,21 +219,6 @@ lua require('Comment').setup()
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 command! -bang -nargs=? -complete=dir F call fzf#vim#files(<q-args>, <bang>0)
-
-"------------------------------------------------------------
-" Syntastic
-"
-
-au BufNewFile, BufRead *.s, *.S set filetype=arm " arm = armv6/v7
-
-hi SystasticErrorSign guifg=white guibg=red
-hi SpellBad ctermfg=red ctermbg=8
-hi SpellCap ctermfg=green ctermbg=8
-
-" Syntastic config files
-let g:syntastic_c_config_file = '.syntastic_c_config_file'
-let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['python']
 
 "------------------------------------------------------------
 " Config Vim Appearance
