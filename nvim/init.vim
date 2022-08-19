@@ -296,7 +296,8 @@ lua <<EOF
     require'diffview'.setup {
         file_panel = {
             win_config = {
-                position = "right",
+                position = "bottom",
+                height = 16,
             }
         }
     }
@@ -427,5 +428,6 @@ lua << EOF
         auto_session_suppress_dirs = {'~/'}
     }
 EOF
+
 
 source ~/.config/nvim/custom.vim
