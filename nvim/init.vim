@@ -22,7 +22,7 @@ set nocompatible
 filetype indent plugin on
 
 " Enable syntax highlighting
-syntax on
+syntax off
 
 
 "------------------------------------------------------------
@@ -143,6 +143,12 @@ set expandtab
 "set shiftwidth=4
 "set tabstop=4
 
+" Make cursor line more obvious
+set cursorline
+
+" Make drawing better
+set lazyredraw
+
 " Install Vim Plug plugins
 call plug#begin()
 
@@ -153,8 +159,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'svermeulen/vim-cutlass'
 Plug 'lervag/vimtex'
 Plug 'kyazdani42/nvim-web-devicons'
+
+" treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
+
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -415,8 +424,8 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 " tab keybinds
 "
 
-nnoremap tj :tabprevious<CR>                                                                            
-nnoremap tk :tabnext<CR>
+nnoremap <leader>tj :tabprevious<CR>                                                                            
+nnoremap <leader>tk :tabnext<CR>
 nnoremap <leader>tn :tabnew<CR>
 
 "------------------------------------------------------------
@@ -434,12 +443,13 @@ EOF
 " relative line number
 "
 
-set number
+set rnu!
+nnoremap <leader>rn :set rnu!<CR>
 
 augroup numbertoggle
-autocmd!
-autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
 
 source ~/.config/nvim/custom.vim
