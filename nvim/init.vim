@@ -154,6 +154,7 @@ Plug 'svermeulen/vim-cutlass'
 Plug 'lervag/vimtex'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -429,5 +430,16 @@ lua << EOF
     }
 EOF
 
+"------------------------------------------------------------
+" relative line number
+"
+
+set number
+
+augroup numbertoggle
+autocmd!
+autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
 
 source ~/.config/nvim/custom.vim
