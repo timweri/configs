@@ -416,6 +416,8 @@ lua << EOF
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Replace }),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
@@ -429,6 +431,7 @@ lua << EOF
         { name = 'buffer' },
     })
     })
+    
 
     -- Set configuration for specific filetype.
     cmp.setup.filetype('gitcommit', {
@@ -459,8 +462,31 @@ lua << EOF
 
     -- Set up lspconfig.
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-    require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+    require('lspconfig')['clangd'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['cmake'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['gopls'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['marksman'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['pyright'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['solc'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['tsserver'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['texlab'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['vimls'].setup {
         capabilities = capabilities
     }
 EOF
