@@ -55,6 +55,8 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+alias nvim="/usr/bin/nvim-linux64/bin/nvim"
+
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/mnt/c/Users/Thanh/AppData/Local/SumatraPDF:$PATH"
 
