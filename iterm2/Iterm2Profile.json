@@ -92,7 +92,7 @@
   "Prompt Before Closing 2" : false,
   "BM Growl" : true,
   "Command" : "",
-  "Description" : "Default",
+  "Description" : "TimWeri iTerm2 Config",
   "AWDS Pane Directory" : "",
   "Disable Window Resizing" : true,
   "Screen" : -1,
@@ -416,7 +416,7 @@
     "Blue Component" : 0.63137254901960782,
     "Green Component" : 0.63137254901960782
   },
-  "Name" : "Default",
+  "Name" : "TimWeri iTerm2 Config",
   "Cursor Text Color" : {
     "Red Component" : 0.027450980392156862,
     "Color Space" : "sRGB",
