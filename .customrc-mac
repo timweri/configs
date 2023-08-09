@@ -1,5 +1,4 @@
 # User configuration
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -26,3 +25,5 @@
 export PATH="/usr/local/bin:${PATH}"
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+
+SSH_AUTH_SOCK="/Users/thanhnguyen/Library/Group Containers/5QYJ6C8ZNT.PassportControl/passportControl"; export SSH_AUTH_SOCK
