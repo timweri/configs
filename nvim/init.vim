@@ -178,7 +178,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'sindrets/diffview.nvim'
 Plug 'TimUntersberger/neogit'
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+Plug 'akinsho/bufferline.nvim'
 Plug 'sainnhe/sonokai'
 Plug 'williamboman/nvim-lsp-installer'
 
