@@ -95,9 +95,6 @@ export EDITOR="$VISUAL"
 # Show/hide git prompt
 alias githide="git config oh-my-zsh.hide-status 1"
 alias gitshow="git config oh-my-zsh.hide-status 0"
-alias vim=nvim
-alias ssh_cs="ssh -D 1081 td4nguye@linux.student.cs.uwaterloo.ca"
-alias ssh_datasci="ssh -D 1080 td4nguye@datasci.cs.uwaterloo.ca"
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
@@ -125,4 +122,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[[ -s "/Users/thanhnguyen/.gvm/scripts/gvm" ]] && source "/Users/thanhnguyen/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
