@@ -152,7 +152,10 @@ set lazyredraw
 " Install Vim Plug plugins
 call plug#begin()
 " Lsp stuffs
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -184,7 +187,6 @@ Plug 'sindrets/diffview.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'akinsho/bufferline.nvim'
 Plug 'sainnhe/sonokai'
-Plug 'williamboman/nvim-lsp-installer'
 
 " Auto detect indentation
 Plug 'tpope/vim-sleuth'
@@ -352,17 +354,19 @@ EOF
 "
 
 lua << EOF
-    local servers = { 'clangd', 'cmake', 'gopls', 'marksman', 'pyright', 'solc', 'gopls', 'tsserver', 'texlab', 'vimls' }
-    require("nvim-lsp-installer").setup {
-        automatic_installation = true,
-        ensure_installed = servers,
+    local servers = { 'clangd', 'cmake', 'marksman', 'pyright', 'solc', 'gopls', 'tsserver', 'texlab', 'vimls' }
+    require("mason").setup({
         ui = {
             icons = {
-                server_installed = "✓",
-                server_pending = "➜",
-                server_uninstalled = "✗"
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
             }
-        },
+        }
+    })
+    require("mason-lspconfig").setup {
+        ensure_installed = servers,
+        automatic_installation = true,
     }
 
     
