@@ -180,7 +180,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim', { 'main': 'ibl' }
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'sindrets/diffview.nvim'
@@ -192,8 +192,9 @@ Plug 'sainnhe/sonokai'
 Plug 'tpope/vim-sleuth'
 
 " sessions
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'rmagatti/auto-session'
+
+" Plug 'nvim-telescope/telescope.nvim'
 
 " Initialize plugin system
 call plug#end()
@@ -220,6 +221,8 @@ xnoremap m d
 
 nnoremap mm dd
 nnoremap M D
+
+xnoremap p P
 
 "------------------------------------------------------------
 " Commands 
@@ -286,24 +289,7 @@ lua <<EOF
     vim.opt.listchars:append("space:⋅")
     vim.opt.listchars:append("eol:↴")
 
-    require("indent_blankline").setup {
-        show_end_of_line = true,
-        space_char_blankline = " ",
-    }
-EOF
-
-"------------------------------------------------------------
-" nvim-tree
-"
-
-nnoremap <C-n> :NvimTreeFocus<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-" nnoremap <leader>n :NvimTreeFindFile<CR>
-
-lua << EOF
-    require'nvim-tree'.setup {
-        open_on_tab = true,
-    }
+    require("ibl").setup()
 EOF
 
 "------------------------------------------------------------
@@ -354,7 +340,7 @@ EOF
 "
 
 lua << EOF
-    local servers = { 'clangd', 'cmake', 'marksman', 'pyright', 'solc', 'gopls', 'tsserver', 'texlab', 'vimls' }
+    local servers = { 'clangd', 'cmake', 'marksman', 'pyright', 'solc', 'gopls', 'tsserver', 'texlab', 'vimls', 'rust_analyzer' }
     require("mason").setup({
         ui = {
             icons = {
@@ -521,13 +507,16 @@ nnoremap <leader>tk :tabnext<CR>
 nnoremap <leader>tn :tabnew<CR>
 
 "------------------------------------------------------------
-" auto-session
+" nvim-tree
 "
 
+nnoremap <C-n> :NvimTreeFocus<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <leader>n :NvimTreeFindFile<CR>
+
 lua << EOF
-    require('auto-session').setup {
-        log_level = 'info',
-        auto_session_suppress_dirs = {'~/'}
+    require'nvim-tree'.setup {
+        open_on_tab = true,
     }
 EOF
 
@@ -543,5 +532,15 @@ augroup numbertoggle
     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
+
+"------------------------------------------------------------
+" relative line number
+"
+lua << EOF
+require("auto-session").setup {
+    log_level = "error",
+    auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+}
+EOF
 
 source ~/.config/nvim/custom.vim
