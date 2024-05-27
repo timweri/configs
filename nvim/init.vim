@@ -19,7 +19,7 @@ set nocompatible
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
 " and for plugins that are filetype specific.
-filetype indent plugin on
+" filetype indent plugin on
 
 " Enable syntax highlighting
 syntax off
@@ -84,7 +84,7 @@ set backspace=indent,eol,start
 
 " When opening a new line and no filetype-specific indenting is enabled, keep
 " the same indent as the line you're currently on. Useful for READMEs, etc.
-set autoindent
+" set autoindent smartindent
 
 " Stop certain movements from always going to the first character of a line.
 " While this behaviour deviates from that of Vi, it does what most users
@@ -128,7 +128,7 @@ set pastetoggle=<F11>
 
 
 "------------------------------------------------------------
-" Indentation options {{{1
+" Indentation options
 "
 " Indentation settings according to personal preference.
 
@@ -273,10 +273,13 @@ colorscheme sonokai
 
 lua <<EOF
     require'nvim-treesitter.configs'.setup {
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
+        indent = {
+            enable = true,
+        },
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+        },
     }
 EOF
 
@@ -340,7 +343,7 @@ EOF
 "
 
 lua << EOF
-    local servers = { 'clangd', 'cmake', 'marksman', 'pyright', 'solc', 'gopls', 'tsserver', 'texlab', 'vimls', 'rust_analyzer' }
+    local servers = { 'clangd', 'cmake', 'marksman', 'pyright', 'solc', 'gopls', 'tsserver', 'texlab', 'vimls', 'rust_analyzer', 'terraformls' }
     require("mason").setup({
         ui = {
             icons = {
@@ -509,6 +512,33 @@ nnoremap <leader>tn :tabnew<CR>
 "------------------------------------------------------------
 " nvim-tree
 "
+
+lua << EOF
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'NvimTree' },
+    callback = function(args)
+      vim.api.nvim_create_autocmd('VimLeavePre', {
+        callback = function()
+          vim.api.nvim_buf_delete(args.buf, { force = true })
+          return true
+        end
+      })
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+    pattern = 'NvimTree*',
+    callback = function()
+      local view = require('nvim-tree.view')
+      local is_visible = view.is_visible()
+
+      local api = require('nvim-tree.api')
+      if not is_visible then
+        api.tree.open()
+      end
+    end,
+  })
+EOF
 
 nnoremap <C-n> :NvimTreeFocus<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
